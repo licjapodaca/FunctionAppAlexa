@@ -47,8 +47,16 @@ namespace FunctionAppAlexa
 					if(intentRequest.Intent.Name == "Solicitudes")
 					{
 						var random = new Random();
-						response = ResponseBuilder.Tell($"Usted tiene {random.Next(23)} solicitudes asignadas. Quiere ver el detalle de estas solicitudes?");
+						int num = random.Next(23);
+						if(num == 1)
+							response = ResponseBuilder.Tell($"Usted tiene {num} solicitud asignada.");
+						else
+							response = ResponseBuilder.Tell($"Usted tiene {num} solicitudes asignadas.");
 					}
+				}
+				else if(requestType == typeof(SessionEndedRequest))
+				{
+					response = ResponseBuilder.Tell("Gracias por utilizar los servicios de gestion de expedientes Temis licenciado Apodaca.");
 				}
 
 				log.LogInformation("Fin de la logica de negocio de Alexa...");
